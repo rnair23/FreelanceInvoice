@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FreelanceInvoice — GST Compliant</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-mark">⬡</span>
+        <span class="logo-text">FreelanceInvoice</span>
+        <span class="logo-badge">GST Ready</span>
+      </div>
+      <nav class="header-actions">
+        <button class="btn-ghost" id="previewBtn">Preview</button>
+        <button class="btn-primary" id="downloadBtn">Download PDF</button>
+      </nav>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="main-layout">
+      <!-- Left: Form Panel -->
+      <section class="form-panel" id="formPanel">
+        <!-- Steps -->
+        <div class="step-tabs">
+          <button class="step-tab active" data-step="1">① Parties</button>
+          <button class="step-tab" data-step="2">② Items</button>
+          <button class="step-tab" data-step="3">③ GST & Terms</button>
+        </div>
+
+        <!-- Step 1: Parties -->
+        <div class="step-content active" id="step-1">
+          <div class="section-block">
+            <h3 class="block-title">Your Details <span class="pill">From</span></h3>
+            <div id="fromFields"></div>
+          </div>
+          <div class="divider-arrow">↓</div>
+          <div class="section-block">
+            <h3 class="block-title">Client Details <span class="pill secondary">To</span></h3>
+            <div id="toFields"></div>
+          </div>
+          <div class="section-block">
+            <h3 class="block-title">Invoice Info</h3>
+            <div id="invoiceMetaFields"></div>
+          </div>
+          <button class="btn-next" onclick="goToStep(2)">Next: Add Items →</button>
+        </div>
+
+        <!-- Step 2: Items -->
+        <div class="step-content" id="step-2">
+          <div class="section-block">
+            <h3 class="block-title">Line Items</h3>
+            <div id="lineItemsContainer"></div>
+            <button class="btn-add-row" id="addItemBtn">+ Add Item</button>
+          </div>
+          <div class="step-nav">
+            <button class="btn-ghost" onclick="goToStep(1)">← Back</button>
+            <button class="btn-next" onclick="goToStep(3)">Next: GST & Terms →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: GST & Terms -->
+        <div class="step-content" id="step-3">
+          <div class="section-block">
+            <h3 class="block-title">GST Settings</h3>
+            <div id="gstFields"></div>
+          </div>
+          <div class="section-block">
+            <h3 class="block-title">Payment & Notes</h3>
+            <div id="paymentFields"></div>
+          </div>
+          <div class="step-nav">
+            <button class="btn-ghost" onclick="goToStep(2)">← Back</button>
+            <button class="btn-primary large" id="generateBtn">Generate Invoice ⬡</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Preview Panel -->
+      <section class="preview-panel" id="previewPanel">
+        <div class="preview-label">LIVE PREVIEW</div>
+        <div class="invoice-sheet" id="invoiceSheet">
+          <!-- Rendered by invoice-renderer.js -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="utils/state.js"></script>
+  <script src="utils/helpers.js"></script>
+  <script src="components/form-builder.js"></script>
+  <script src="components/line-items.js"></script>
+  <script src="components/gst-calculator.js"></script>
+  <script src="components/invoice-renderer.js"></script>
+  <script src="components/pdf-export.js"></script>
+  <script src="utils/app.js"></script>
+</body>
+</html>
